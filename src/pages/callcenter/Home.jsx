@@ -1,17 +1,26 @@
 import Aside from "../../components/AsideCallCenter"
+import { useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import Header from "../../components/HeaderCallCenter";
 
 
 const Home = () => {
-    return (
-        <div className="bg-[#F4F4F4] relative h-screen">
+    const location = useLocation();
+    const [animate, setAnimate] = useState(false);
 
-            <div className="absolute top-0 left-0 w-full h-32 bg-[#24ADE8] z-0">
-                <header>
-                    <div>
-                        
-                    </div>
-                </header>
-            </div>
+    
+    useEffect(() => {
+        if (location.state?.fromLogin) {
+        setAnimate(true);
+
+        window.history.replaceState({}, document.title);
+        }
+    }, [location.state]);
+
+    return (
+        <div className={animate ? "animate-page" : "bg-[#F4F4F4] relative h-screen"}>
+
+            <Header />
 
             <div className="relative flex h-full z-10">
                 <Aside />

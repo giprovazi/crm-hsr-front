@@ -29,7 +29,7 @@ const Login = () => {
             if (response.data.setor === "ADMIN") {
                 navigate("/admin");
             } else if (response.data.setor === "CALL_CENTER") {
-                navigate("/callcenter/home");
+                navigate("/callcenter/home", { state: { fromLogin: true } });
             } else {
                 navigate("/recepcao");
             }
@@ -40,8 +40,6 @@ const Login = () => {
     };
 
     
-
-
 
 
 
@@ -90,7 +88,7 @@ const Login = () => {
                     </div>
 
                     <div className="flex justify-center mt-8">
-                        <button type="submit" className="px-10 py-3 rounded-xl bg-white text-[rgb(182,150,7)] shadow-lg font-konkhmer text-lg hover:bg-slate-50">Entrar</button>
+                        <button type="submit" className="px-10 py-3 rounded-xl bg-white text-[rgba(0,161,230,0.85)] shadow-lg font-konkhmer text-lg hover:bg-slate-50">Entrar</button>
                     </div>
 
 
