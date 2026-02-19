@@ -57,7 +57,7 @@ const Login = () => {
                     <div className="pb-28 pt-4">
                         <img src={Logo} alt="Logo" className="w-[10rem] 2xl:w-[11rem]" />
                     </div> 
-                    <form onSubmit={handleSubmit} className="bg-[rgba(0,161,230,0.85)] w-full max-w-sm md:max-w-xl 2xl:max-w-3xl  rounded-3xl px-6  pb-10 pt-7 shadow-2xl flex flex-col  ">
+                    <form onSubmit={handleSubmit} className="bg-[rgba(0,161,230,0.85)] w-full max-w-sm md:max-w-xl 2xl:max-w-2xl  rounded-3xl px-6  pb-10 pt-7 shadow-2xl flex flex-col  ">
 
                         <h1 className="font-konkhmer text-white text-4xl text-center mb-5 mt-4">Login</h1>
 
