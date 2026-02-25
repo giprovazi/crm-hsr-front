@@ -4,18 +4,21 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { useState } from "react";
 import { authApi } from "../services/authApi";
+import { motion } from "framer-motion";
 
 const Login = () => {
 
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [erro, setErro] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const { login } = useAuth();
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         setErro("");
 
         try {
@@ -36,6 +39,7 @@ const Login = () => {
 
         } catch (err) {
             setErro("Usuário ou senha inválidos");
+            setLoading(false);
         }
     };
 
@@ -55,21 +59,21 @@ const Login = () => {
 
                 <div className="flex-1 flex flex-col items-center justify-center">
                     <div className="pb-28 pt-4">
-                        <img src={Logo} alt="Logo" className="w-[10rem] 2xl:w-[11rem]" />
+                        <img src={Logo} alt="Logo" className="w-[9rem] " />
                     </div> 
-                    <form onSubmit={handleSubmit} className="bg-[rgba(0,161,230,0.85)] w-full max-w-sm md:max-w-xl 2xl:max-w-2xl  rounded-3xl px-6  pb-10 pt-7 shadow-2xl flex flex-col  ">
+                    <form onSubmit={handleSubmit} className="bg-[rgba(0,161,230,0.85)] w-full max-w-sm md:max-w-md 2xl:max-w-lg mb-8  rounded-3xl px-6  pb-10 pt-7 shadow-2xl flex flex-col  ">
 
-                        <h1 className="font-konkhmer text-white text-4xl text-center mb-5 mt-4">Login</h1>
+                        <h1 className="font-konkhmer text-white text-3xl text-center mb-5 mt-4">Login</h1>
 
                         <div className="flex flex-col items-start w-full gap-12 px-5">
                             <div className="w-full">
-                                <p className="font-konkhmer text-white text-[24px] mb-2">Email</p>
-                                <input value={email} onChange={(e) => setEmail(e.target.value)} type="text" placeholder="Digite seu email..." className=" placeholder:font-konkhmer placeholder:text-[#b8b8b8c5] text-[20px] w-full py-6 px-3 rounded-lg outline-none border-none appearance-none focus:outline-none focus:ring-0"/>
+                                <p className="font-konkhmer text-white text-[20px] mb-2">Email</p>
+                                <input value={email} onChange={(e) => setEmail(e.target.value)} type="text" placeholder="Digite seu email..." className=" placeholder:font-konkhmer placeholder:text-[#b8b8b8c5] text-[16px] w-full py-6 px-3 rounded-lg outline-none border-none appearance-none focus:outline-none focus:ring-0"/>
                             </div>
 
                             <div className="w-full">
-                                <p className="font-konkhmer text-white text-[24px] mb-2">Senha</p>
-                                <input type="password" value={senha} onChange={(e)=> setSenha(e.target.value)} placeholder="Digite sua senha..." className="w-full font-konkhmer placeholder:text-[#b8b8b8c5] text-black text-[18px] py-6 px-3 rounded-lg outline-none border-none appearance-none focus:outline-none focus:ring-0 "/>
+                                <p className="font-konkhmer text-white text-[20px] mb-2">Senha</p>
+                                <input type="password" value={senha} onChange={(e)=> setSenha(e.target.value)} placeholder="Digite sua senha..." className="w-full font-konkhmer placeholder:text-[#b8b8b8c5] text-black text-[16px] py-6 px-3 rounded-lg outline-none border-none appearance-none focus:outline-none focus:ring-0 "/>
                             </div> 
 
                         {erro &&
@@ -93,9 +97,22 @@ const Login = () => {
                         </div>
 
                         <div className="flex justify-center mt-8">
-                            <button type="submit" className="px-10 py-3 rounded-xl bg-white text-[rgba(0,161,230,0.85)] shadow-lg font-konkhmer text-xl 2xl:text-2xl hover:bg-slate-50">Entrar</button>
+                            <button
+                                type="submit"
+                                disabled={loading}
+                                className="px-10 py-3 rounded-xl bg-white text-[rgba(0,161,230,0.85)] shadow-lg font-konkhmer text-lg 2xl:text-xl hover:bg-slate-50 flex items-center justify-center min-w-[140px] disabled:opacity-70"
+                            >
+                                {loading ? (
+                                    <motion.div
+                                        className="w-6 h-6 border-4 border-[rgba(0,161,230,0.85)] border-t-transparent rounded-full"
+                                        animate={{ rotate: 360 }}
+                                        transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+                                    />
+                                ) : (
+                                    "Entrar"
+                                )}
+                            </button>
                         </div>
-
 
                     </form>                    
                 </div>               
