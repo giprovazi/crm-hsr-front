@@ -19,7 +19,7 @@ const Home = () => {
 
     return (
         <div className={animate ? "animate-page" : "bg-[#F4F4F4] relative h-screen"}>
-            <div className="relative flex h-full z-10">
+            <div className="relative flex h-full flex-col z-20">
                 <Aside />
             </div>
 

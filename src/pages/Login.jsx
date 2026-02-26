@@ -68,12 +68,12 @@ const Login = () => {
                         <div className="flex flex-col items-start w-full gap-12 px-5">
                             <div className="w-full">
                                 <p className="font-konkhmer text-white text-[20px] mb-2">Email</p>
-                                <input value={email} onChange={(e) => setEmail(e.target.value)} type="text" placeholder="Digite seu email..." className=" placeholder:font-konkhmer placeholder:text-[#b8b8b8c5] text-[16px] w-full py-6 px-3 rounded-lg outline-none border-none appearance-none focus:outline-none focus:ring-0"/>
+                                <input value={email} onChange={(e) => setEmail(e.target.value)}     type="email" name="email" autoComplete="email" placeholder="Digite seu email..." className=" placeholder:font-konkhmer placeholder:text-[#b8b8b8c5] text-[16px] w-full py-6 px-3 rounded-lg outline-none border-none appearance-none focus:outline-none focus:ring-0"/>
                             </div>
 
                             <div className="w-full">
                                 <p className="font-konkhmer text-white text-[20px] mb-2">Senha</p>
-                                <input type="password" value={senha} onChange={(e)=> setSenha(e.target.value)} placeholder="Digite sua senha..." className="w-full font-konkhmer placeholder:text-[#b8b8b8c5] text-black text-[16px] py-6 px-3 rounded-lg outline-none border-none appearance-none focus:outline-none focus:ring-0 "/>
+                                <input type="password" value={senha} name="password" autoComplete="current-password" onChange={(e)=> setSenha(e.target.value)} placeholder="Digite sua senha..." className="w-full font-konkhmer placeholder:text-[#b8b8b8c5] text-black text-[16px] py-6 px-3 rounded-lg outline-none border-none appearance-none focus:outline-none focus:ring-0 "/>
                             </div> 
 
                         {erro &&

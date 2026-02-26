@@ -15,7 +15,7 @@ import { NavLink } from "react-router-dom";
 
 const AsideCallCenter = () => {
     return (
-        <aside className=" bg-white w-64 h-screen rounded-tr-[4rem] overflow-hidden shadow-[9px_6px_19.6px_0px_rgba(0,0,0,0.25)]">
+        <aside className=" bg-white w-64 h-screen rounded-tr-[4rem]  overflow-hidden shadow-[9px_6px_19.6px_0px_rgba(0,0,0,0.25)]">
             <div className="pt-10 pl-16">
                 <img src={Logo} alt="Logo" className="w-[5.8rem] " />
             </div>
