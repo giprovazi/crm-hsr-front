@@ -100,7 +100,7 @@ const Login = () => {
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="px-10 py-3 rounded-xl bg-white text-[rgba(0,161,230,0.85)] shadow-lg font-konkhmer text-lg 2xl:text-xl hover:bg-slate-50 flex items-center justify-center min-w-[140px] disabled:opacity-70"
+                                className="px-10 py-3 rounded-xl bg-white text-[rgba(0,161,230,0.85)] shadow-lg font-konkhmer text-lg 2xl:text-xl hover:bg-slate-50 flex items-center justify-center min-w-[140px] "
                             >
                                 {loading ? (
                                     <motion.div
