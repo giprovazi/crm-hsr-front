@@ -7,7 +7,9 @@ import iconNotification from "../assets/iconNotification.svg"
 import iconLogout from "../assets/iconLogout.svg"
 import { useAuth } from "../contexts/AuthContext"
 import { useNavigate } from "react-router-dom";
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import OutsideClickHandler from "react-outside-click-handler";
+import Swal from 'sweetalert2'
 
 
 
@@ -16,15 +18,25 @@ const HeaderCallCenter = () => {
 
     const { user } = useAuth();
     const { logout } = useAuth();
+    const { getCurrentUser } = useAuth();
+    const [currentUser, setCurrentUser] = useState(null)
     const navigate = useNavigate();
-    const [clickLogout, setClickLogout] = useState(false);
+    const [clickUserProfile, setClickUserProfile] = useState(false);
 
     const sair = () => {
         logout()
         navigate("/login", { replace: true })
-
-
     }
+
+    useEffect(() => {
+        const loadUser = async () => {
+            const user = await getCurrentUser()
+            setCurrentUser(user)
+        }
+        loadUser()
+    }, [])
+
+
 
 
 
@@ -32,7 +44,7 @@ const HeaderCallCenter = () => {
 
         <header className="absolute top-0 left-0 w-full h-32 bg-[#24ADE8]  ">
             <div className="ml-[300px] mt-8 gap-5 flex items-center  ">
-                <div className="flex gap-6 flex-1 text-white font-lexend text-xl  ">
+                <div className="flex gap-6 flex-1 text-white font-lexend text-lg 2xl:text-xl  ">
 
                     <div className="w-full max-w-xs border border-white flex justify-between rounded-md pl-3 py-3 px-2 z-20 group hover:bg-[#ffffff0e] transition-colors duration-200">
                         <div className="flex items-center gap-4 ">
@@ -69,58 +81,52 @@ const HeaderCallCenter = () => {
 
 
                 <div className="mr-4 flex gap-4 items-baseline z-20">
-                    <button>
-                        <div className="flex items-center gap-1">
-                            <img src={iconUserProfile} alt="Icone Perfil Funcionario" />
-                            <p className="text-white font-lexend">{user?.nome.split(" ")[0]}</p>
+                    <OutsideClickHandler onOutsideClick={() => setClickUserProfile(false)}>
+                        <div className="relative">
+                            <button onClick={() => setClickUserProfile(true)}>
+                                <div className="flex items-center gap-1">
+                                    <img src={iconUserProfile} alt="Icone Perfil Funcionario" />
+                                    <p className="text-white font-lexend ">{user?.nome.split(" ")[0]}</p>
+                                </div>
+                            </button>
+
+
+                            <div className={`absolute left-1 mt-1 w-56 p-3 font-lexend flex flex-col gap-3 bg-gray-100 rounded-lg shadow-lg z-20 transition-all duration-200 ease-in-out ${clickUserProfile ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-2 scale-95 pointer-events-none"}`}>
+                                <div className="bg-[#24ADE8] text-white p-2 shadow-lg rounded-md flex gap-1 items-center">
+                                    <img src={iconUserProfile} alt="Icone Perfil Funcionario" />
+                                    <p className=" ">{currentUser?.nome}</p>
+                                </div>
+                                <p className="text-black  text-[0.9rem]"><strong>Email:</strong> {currentUser?.email}</p>
+                                <p className="text-black text-[0.9rem]"><strong>Setor:</strong> {currentUser?.setor}</p>
+                            </div>
+
                         </div>
-                    </button>
+                    </OutsideClickHandler>
+
 
 
                     <div className=" h-9 w-[1px] bg-[#ffffff]" />
 
                     <div className="flex gap-2">
                         <img src={iconNotification} alt="Icone Notificacao" />
-                        <button onClick={() => setClickLogout(true)} >
+                        <button onClick={() => Swal.fire({
+                            title: "Você deseja mesmo sair ?",
+                            icon: "question",
+                            showCancelButton: true,
+                            color: "#24ADE8",
+                            iconColor: "#24ADE8",
+                            confirmButtonColor: "#24ADE8",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Sair",
+                            cancelButtonText: "Cancelar"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                sair();
+                            }
+                        })} >
+
                             <img src={iconLogout} alt="Logout" />
                         </button>
-
-                        {clickLogout && (
-                            <div className="fixed inset-0 text-white flex justify-center items-center bg-black/40 z-50 cursor-default">
-
-                                <div className="bg-[#24ADE8] rounded-xl shadow-xl p-6 w-[350px] flex flex-col justify-center items-center animate-fadeIn">
-
-                                    <h2 className="text-lg font-semibold mb-3">
-                                        Confirmar saída
-                                    </h2>
-
-                                    <p className=" mb-6">
-                                        Você deseja realmente sair?
-                                    </p>
-
-                                    <div className="flex justify-center gap-3">
-
-                                        <button
-                                            onClick={() => setClickLogout(false)}
-                                            className="px-4 py-2 rounded-md border border-gray-300 hover:bg-[#ffffff0e] transition"
-                                        >
-                                            Cancelar
-                                        </button>
-
-                                        <button
-                                            onClick={sair}
-                                            className="px-4 py-2 rounded-md bg-red-500 text-white hover:bg-red-600 transition"
-                                        >
-                                            Sair
-                                        </button>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        )}
-
                     </div>
 
 
@@ -129,7 +135,7 @@ const HeaderCallCenter = () => {
                 </div>
             </div>
 
-        </header>
+        </header >
 
     )
 }

@@ -25,8 +25,8 @@ const Home = () => {
 
             <Header />
 
-            <main className="flex p-6">
-                <p>aaa</p>
+            <main className="">
+                
             </main>
 
 
