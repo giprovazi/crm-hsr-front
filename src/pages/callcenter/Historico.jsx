@@ -4,14 +4,20 @@ import Header from "../../components/HeaderCallCenter";
 
 
 const Historico = () => {
-    return (
-        <div className="bg-[#F4F4F4] relative h-screen">
-
-            <Header />
-            
-            <div className="relative flex h-full z-10">
+return (
+        <div className=" min-w-[1200px] bg-[#F4F4F4] relative min-h-screen ">
+            <div className="relative flex flex-col z-20">
                 <Aside />
             </div>
+
+            <Header />
+
+            <main className="flex ml-[300px] mt-28 fade-main ">
+                
+
+            </main>
+
+
 
 
 

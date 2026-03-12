@@ -63,16 +63,16 @@ const Login = () => {
                     </div> 
                     <form onSubmit={handleSubmit} className="bg-[rgba(0,161,230,0.85)] w-full max-w-sm md:max-w-md 2xl:max-w-lg mb-8  rounded-3xl px-6  pb-10 pt-7 shadow-2xl flex flex-col  ">
 
-                        <h1 className="font-konkhmer text-white text-3xl text-center mb-5 mt-4">Login</h1>
+                        <h1 className="font-lexend text-white text-3xl text-center mb-5 mt-4">Login</h1>
 
                         <div className="flex flex-col items-start w-full gap-12 px-5">
                             <div className="w-full">
-                                <p className="font-konkhmer text-white text-[20px] mb-2">Email</p>
+                                <p className="font-lexend text-white text-[20px] mb-2">Email</p>
                                 <input value={email} onChange={(e) => setEmail(e.target.value)}     type="email" name="email" autoComplete="email" placeholder="Digite seu email..." className=" placeholder:font-konkhmer placeholder:text-[#b8b8b8c5] text-[16px] w-full py-6 px-3 rounded-lg outline-none border-none appearance-none focus:outline-none focus:ring-0"/>
                             </div>
 
                             <div className="w-full">
-                                <p className="font-konkhmer text-white text-[20px] mb-2">Senha</p>
+                                <p className="font-lexend text-white text-[20px] mb-2">Senha</p>
                                 <input type="password" value={senha} name="password" autoComplete="current-password" onChange={(e)=> setSenha(e.target.value)} placeholder="Digite sua senha..." className="w-full font-konkhmer placeholder:text-[#b8b8b8c5] text-black text-[16px] py-6 px-3 rounded-lg outline-none border-none appearance-none focus:outline-none focus:ring-0 "/>
                             </div> 
 
@@ -100,7 +100,7 @@ const Login = () => {
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="px-10 py-3 rounded-xl bg-white text-[rgba(0,161,230,0.85)] shadow-lg font-konkhmer text-lg 2xl:text-xl hover:bg-slate-50 flex items-center justify-center min-w-[140px] "
+                                className="px-10 py-3 rounded-xl bg-white text-[rgba(0,161,230,0.85)] shadow-lg font-lexend text-lg 2xl:text-xl hover:bg-slate-50 flex items-center justify-center min-w-[140px] "
                             >
                                 {loading ? (
                                     <motion.div

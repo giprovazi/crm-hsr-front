@@ -4,6 +4,7 @@ import iconAgendaWhite from "../assets/iconAgendaWhite.svg"
 import iconCadastroWhite from "../assets/iconCadastroWhite.svg"
 import iconUserProfile from "../assets/iconUserProfile.svg"
 import iconNotification from "../assets/iconNotification.svg"
+import iconNotificationNone from "../assets/iconNotificationNone.svg"
 import iconLogout from "../assets/iconLogout.svg"
 import { useAuth } from "../contexts/AuthContext"
 import { useNavigate } from "react-router-dom";
@@ -42,13 +43,13 @@ const HeaderCallCenter = () => {
 
     return (
 
-        <header className="absolute top-0 left-0 w-full h-32 bg-[#24ADE8]  ">
+        <header className="absolute top-0 left-0 w-full h-28 bg-[#24ADE8] shadow-md  ">
             <div className="ml-[300px] mt-8 gap-5 flex items-center  ">
-                <div className="flex gap-6 flex-1 text-white font-lexend text-lg 2xl:text-xl  ">
+                <div className="flex gap-6 flex-1 text-white font-lexend text-md 2xl:text-lg  ">
 
                     <div className="w-full max-w-xs border border-white flex justify-between rounded-md pl-3 py-3 px-2 z-20 group hover:bg-[#ffffff0e] transition-colors duration-200">
                         <div className="flex items-center gap-4 ">
-                            <img src={iconLeadsWhite} alt="Icone Leads" className="w-[2.2rem]" />
+                            <img src={iconLeadsWhite} alt="Icone Leads" className="w-[1.8rem]" />
                             <p className="cursor-default">Novo Lead</p>
                         </div>
 
@@ -59,7 +60,7 @@ const HeaderCallCenter = () => {
 
                     <div className="w-full max-w-xs border border-white flex justify-between rounded-md pl-3 py-3 px-2 z-20 group hover:bg-[#ffffff0e] transition-colors duration-200">
                         <div className="flex items-center gap-4 ">
-                            <img src={iconAgendaWhite} alt="Icone Agenda" className="w-[2.2rem]" />
+                            <img src={iconAgendaWhite} alt="Icone Agenda" className="w-[1.8rem]" />
                             <p className="cursor-default">Novo Agendamento</p>
                         </div>
 
@@ -69,7 +70,7 @@ const HeaderCallCenter = () => {
 
                     <div className="w-full max-w-xs border border-white flex justify-between rounded-md pl-3 py-3 px-2 z-20 group hover:bg-[#ffffff0e] transition-colors duration-200">
                         <div className="flex items-center gap-4 ">
-                            <img src={iconCadastroWhite} alt="Icone Cadastro" className="w-[2.2rem]" />
+                            <img src={iconCadastroWhite} alt="Icone Cadastro" className="w-[1.8rem]" />
                             <p className="cursor-default">Novo Cadastro</p>
                         </div>
 
@@ -80,10 +81,10 @@ const HeaderCallCenter = () => {
                 </div>
 
 
-                <div className="mr-4 flex gap-4 items-baseline z-20">
+                <div className="mr-10 flex gap-4 items-baseline z-20">
                     <OutsideClickHandler onOutsideClick={() => setClickUserProfile(false)}>
                         <div className="relative">
-                            <button onClick={() => setClickUserProfile(true)}>
+                            <button onClick={() => setClickUserProfile(prev => !prev)}>
                                 <div className="flex items-center gap-1">
                                     <img src={iconUserProfile} alt="Icone Perfil Funcionario" />
                                     <p className="text-white font-lexend ">{user?.nome.split(" ")[0]}</p>
@@ -108,12 +109,12 @@ const HeaderCallCenter = () => {
                     <div className=" h-9 w-[1px] bg-[#ffffff]" />
 
                     <div className="flex gap-2">
-                        <img src={iconNotification} alt="Icone Notificacao" />
+                        <img src={iconNotificationNone} alt="Icone Notificacao" />
                         <button onClick={() => Swal.fire({
                             title: "Você deseja mesmo sair ?",
                             icon: "question",
                             showCancelButton: true,
-                            color: "#24ADE8",
+                            
                             iconColor: "#24ADE8",
                             confirmButtonColor: "#24ADE8",
                             cancelButtonColor: "#d33",

@@ -15,19 +15,19 @@ import { NavLink } from "react-router-dom";
 
 const AsideCallCenter = () => {
     return (
-        <aside className=" bg-white w-64 h-screen rounded-tr-[4rem]  overflow-hidden shadow-[9px_6px_19.6px_0px_rgba(0,0,0,0.25)]">
+        <aside className=" bg-white w-64 fixed left-0 top-0 h-screen rounded-r-xl  overflow-hidden shadow-[9px_6px_19.6px_0px_rgba(0,0,0,0.25)]">
             <div className="pt-10 pl-16">
-                <img src={Logo} alt="Logo" className="w-[5.8rem] " />
+                <img src={Logo} alt="Logo" className="w-[5.4rem] " />
             </div>
 
-            <nav className="flex flex-col mt-20 gap-5 ">
+            <nav className="flex flex-col mt-14 gap-3 ml-2 ">
                 <div>
-                    <NavLink to="/callcenter/home" className={({ isActive }) =>`flex p-4 w-full gap-3 items-baseline transition-all ${isActive ? "bg-[#24ADE8] text-white " : " text-[#00A1E6] bg-white"}`}>
+                    <NavLink to="/callcenter/home" className={({ isActive }) =>`flex p-4  gap-3 items-baseline transition-all ${isActive ? "shadow-md ml-3 rounded-r-none rounded-md bg-[#24ADE8] text-white " : " text-[#00A1E6] bg-white"}`}>
 
                         {({ isActive }) => (
                             <>
-                                <img src={isActive ? iconHomeWhite : iconHome} alt="Icone Home" className="w-[2rem] translate-y-[5px]" />
-                                <p className="font-lexend  text-[22px]">HOME</p>
+                                <img src={isActive ? iconHomeWhite : iconHome} alt="Icone Home" className="w-[1.6rem] translate-y-[5px]" />
+                                <p className="font-lexend  text-[18px]">Dashboard</p>
                                 
                             </>
                         )}
@@ -38,12 +38,12 @@ const AsideCallCenter = () => {
                
 
                 <div>
-                    <NavLink to="/callcenter/leads" className={({ isActive }) =>`flex p-4 w-full gap-3 items-baseline transition-all ${isActive ? "bg-[#24ADE8] text-white " : " text-[#00A1E6] bg-white"}`}>
+                    <NavLink to="/callcenter/leads" className={({ isActive }) =>`flex p-4 gap-3 items-baseline transition-all ${isActive ? "shadow-md ml-3 rounded-r-none rounded-md bg-[#24ADE8] text-white " : " text-[#00A1E6] bg-white"}`}>
 
                         {({ isActive }) => (
                             <>
-                                <img src={isActive ? iconLeadsWhite : iconLeads} alt="Icone Leads" className="w-[2rem] translate-y-[5px]" />
-                                <p className="font-lexend  text-[22px]">LEADS</p>
+                                <img src={isActive ? iconLeadsWhite : iconLeads} alt="Icone Leads" className="w-[1.6rem] translate-y-[5px]" />
+                                <p className="font-lexend  text-[18px]">Leads</p>
                             </>
                         )}
                     </NavLink>
@@ -52,12 +52,12 @@ const AsideCallCenter = () => {
 
                 
                 <div>
-                    <NavLink to="/callcenter/agenda" className={({ isActive }) =>`flex p-4 w-full gap-3 items-baseline transition-all ${isActive ? "bg-[#24ADE8] text-white " : " text-[#00A1E6] bg-white"}`}>
+                    <NavLink to="/callcenter/agenda" className={({ isActive }) =>`flex p-4 gap-3 items-baseline transition-all ${isActive ? "shadow-md ml-3 rounded-r-none rounded-md bg-[#24ADE8] text-white " : " text-[#00A1E6] bg-white"}`}>
 
                         {({ isActive }) => (
                             <>
-                                <img src={isActive ? iconAgendaWhite : iconAgenda} alt="Icone Agenda" className="w-[2rem] translate-y-[5px]" />
-                                <p className="font-lexend  text-[22px]">AGENDA</p>
+                                <img src={isActive ? iconAgendaWhite : iconAgenda} alt="Icone Agenda" className="w-[1.6rem] translate-y-[5px]" />
+                                <p className="font-lexend  text-[18px]">Agenda</p>
                             </>
                         )}
                     </NavLink>
@@ -66,12 +66,12 @@ const AsideCallCenter = () => {
 
 
                 <div>
-                    <NavLink to="/callcenter/confirmacoes" className={({ isActive }) =>`flex p-4 w-full gap-3 items-baseline transition-all ${isActive ? "bg-[#24ADE8] text-white " : " text-[#00A1E6] bg-white"}`}>
+                    <NavLink to="/callcenter/confirmacoes" className={({ isActive }) =>`flex p-4 gap-3 items-baseline transition-all ${isActive ? "shadow-md ml-3 rounded-r-none rounded-md bg-[#24ADE8] text-white " : " text-[#00A1E6] bg-white"}`}>
 
                         {({ isActive }) => (
                             <>
-                                <img src={isActive ? iconConfirmacoesWhite : iconConfirmacoes} alt="Icone Confirmacoes" className="w-[2rem] translate-y-[5px]" />
-                                <p className="font-lexend  text-[21px]">CONFIRMAÇÕES</p>
+                                <img src={isActive ? iconConfirmacoesWhite : iconConfirmacoes} alt="Icone Confirmacoes" className="w-[1.6rem] translate-y-[5px]" />
+                                <p className="font-lexend  text-[18px]">Confirmações</p>
                             </>
                         )}
                     </NavLink>
@@ -80,12 +80,12 @@ const AsideCallCenter = () => {
 
 
                 <div>
-                    <NavLink to="/callcenter/historico" className={({ isActive }) =>`flex p-4 w-full gap-3 items-baseline transition-all ${isActive ? "bg-[#24ADE8] text-white " : " text-[#00A1E6] bg-white"}`}>
+                    <NavLink to="/callcenter/historico" className={({ isActive }) =>`flex p-4 gap-3 items-baseline transition-all ${isActive ? "shadow-md ml-3 rounded-r-none rounded-md bg-[#24ADE8] text-white " : " text-[#00A1E6] bg-white"}`}>
 
                         {({ isActive }) => (
                             <>
-                                <img src={isActive ? iconHistoricoWhite : iconHistorico} alt="Icone Historico" className="w-[2rem] translate-y-[5px]" />
-                                <p className="font-lexend text-[22px]">HISTÓRICO</p>
+                                <img src={isActive ? iconHistoricoWhite : iconHistorico} alt="Icone Historico" className="w-[1.6rem] translate-y-[5px]" />
+                                <p className="font-lexend text-[18px]">Histórico</p>
                             </>
                         )}
                     </NavLink>
@@ -94,12 +94,12 @@ const AsideCallCenter = () => {
 
 
                 <div>
-                    <NavLink to="/callcenter/cadastro" className={({ isActive }) =>`flex p-4 w-full gap-3 items-baseline transition-all ${isActive ? "bg-[#24ADE8] text-white " : " text-[#00A1E6] bg-white"}`}>
+                    <NavLink to="/callcenter/cadastro" className={({ isActive }) =>`flex p-4  gap-3 items-baseline transition-all ${isActive ? "shadow-md ml-3 rounded-r-none rounded-md bg-[#24ADE8] text-white " : " text-[#00A1E6] bg-white"}`}>
 
                         {({ isActive }) => (
                             <>
-                                <img src={isActive ? iconCadastroWhite : iconCadastro} alt="Icone Cadastro" className="w-[2rem] translate-y-[5px]" />
-                                <p className="font-lexend text-[22px]">CADASTRO</p>
+                                <img src={isActive ? iconCadastroWhite : iconCadastro} alt="Icone Cadastro" className="w-[1.6rem] translate-y-[5px]" />
+                                <p className="font-lexend text-[18px]">Cadastro</p>
                             </>
                         )}
                     </NavLink>
