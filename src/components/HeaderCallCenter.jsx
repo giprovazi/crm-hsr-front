@@ -79,7 +79,7 @@ const HeaderCallCenter = ({ toggleSidebar, isSidebarOpen }) => {
                                 </div>
                             </button>
 
-                            <div className={`absolute right-0 mt-1 w-56 p-3 font-lexend flex flex-col gap-3 bg-gray-100 rounded-lg shadow-lg z-20 transition-all duration-200 ease-in-out ${clickUserProfile ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-2 scale-95 pointer-events-none"}`}>
+                            <div className={`absolute z-10 right-0 mt-1 w-56 p-3 font-lexend flex flex-col gap-3 bg-gray-100 rounded-lg shadow-lg transition-all duration-200 ease-in-out ${clickUserProfile ? "opacity-100 translate-y-0 scale-100 pointer-events-auto " : "opacity-0 -translate-y-2 scale-95 pointer-events-none"}`}>
                                 <div className="bg-[#24ADE8] text-white p-2 shadow-lg rounded-md flex gap-1 items-center">
                                     <img src={iconUserProfile} alt="Icone Perfil Funcionario" />
                                     <p className=" ">{currentUser?.nome}</p>
