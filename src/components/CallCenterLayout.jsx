@@ -3,10 +3,17 @@ import Aside from "./AsideCallCenter";
 import Header from "./HeaderCallCenter"; 
 
 const CallCenterLayout = ({ children }) => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(() => {
+        const saved = localStorage.getItem('sidebarOpen')
+        return saved !== null ? JSON.parse(saved) : true
+    });
 
     const toggleSidebar = () => {
-        setIsSidebarOpen(!isSidebarOpen);
+        setIsSidebarOpen(prev => {
+            const next = !prev
+            localStorage.setItem('sidebarOpen', JSON.stringify(next))
+            return next
+        });
     };
 
     return (

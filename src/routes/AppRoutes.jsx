@@ -7,6 +7,7 @@ import Agenda from "../pages/callcenter/Agenda";
 import Confirmacoes from "../pages/callcenter/Confirmacoes";
 import Historico from "../pages/callcenter/Historico";
 import Cadastro from "../pages/callcenter/Cadastro";
+import LeadsDetalhes from "../pages/callcenter/LeadsDetalhes"
 import { Navigate } from "react-router-dom";
 
 export default function AppRoutes() {
@@ -41,6 +42,13 @@ export default function AppRoutes() {
               <Leads />
             </RoleRoute>
           }
+        />
+
+        <Route path="/callcenter/leads/:id" element={
+          <RoleRoute allowedRoles={["CALL_CENTER", "ADMIN"]}>
+            <LeadsDetalhes />
+          </RoleRoute>
+          } 
         />
 
         <Route

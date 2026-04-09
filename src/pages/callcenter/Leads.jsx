@@ -6,7 +6,7 @@ import iconLeads from "../../assets/iconLeads.svg";
 import iconSearch from "../../assets/search.png";
 import Swal from 'sweetalert2';
 import { ChevronDown } from "lucide-react";
-import CardLeadsJsx from "../../components/CardLeads";
+import CardLeads from "../../components/CardLeads";
 
 const Leads = () => {
     const [leads, setLeads] = useState([]);
@@ -57,7 +57,6 @@ const Leads = () => {
         try {
             const response = await api.get(`/api/leads/funcionario/${currentUser?.id}/${leadId}`);
             setLeadsFiltrado([response.data]);
-            console.log(response.data)
         } catch (error) {
             Swal.fire({
                 icon: "error",
@@ -114,7 +113,7 @@ const Leads = () => {
                         </div>
                         <div className="flex flex-col gap-4 mt-6">
                             {leadsPorStatus.NOVO.map((lead) => (
-                                <CardLeadsJsx key={lead.id} lead={lead}/>
+                                <CardLeads key={lead.id} lead={lead}/>
                             ))}
                         </div>
                     </div>
@@ -126,7 +125,7 @@ const Leads = () => {
                         </div>
                         <div className="flex flex-col gap-4 mt-6">
                             {leadsPorStatus.EM_ATENDIMENTO.map((lead) => (
-                                <CardLeadsJsx key={lead.id} lead={lead}/>
+                                <CardLeads key={lead.id} lead={lead}/>
                             ))}
                         </div>
                     </div>
@@ -138,7 +137,7 @@ const Leads = () => {
                         </div>
                         <div className="flex flex-col gap-4 mt-6">
                             {leadsPorStatus.AGENDADO.map((lead) => (
-                                <CardLeadsJsx key={lead.id} lead={lead}/>
+                                <CardLeads key={lead.id} lead={lead}/>
                             ))}
                         </div>
                     </div>
@@ -150,7 +149,7 @@ const Leads = () => {
                         </div>
                         <div className="flex flex-col gap-4 mt-6">
                             {leadsPorStatus.PERDIDO.map((lead) => (
-                                <CardLeadsJsx key={lead.id} lead={lead}/>               
+                                <CardLeads key={lead.id} lead={lead}/>               
                             ))}
                         </div>
                     </div>
@@ -162,7 +161,7 @@ const Leads = () => {
                         </div>
                         <div className="flex flex-col gap-4 mt-6">
                             {leadsPorStatus.ENCAMINHADO_VENDAS.map((lead) => (
-                                <CardLeadsJsx key={lead.id} lead={lead}/>   
+                                <CardLeads key={lead.id} lead={lead}/>   
                             ))}
                         </div>
                     </div>
