@@ -23,6 +23,10 @@ const HeaderCallCenter = ({ toggleSidebar, isSidebarOpen }) => {
         navigate("/login", { replace: true })
     }
 
+    const initials = currentUser?.nome
+        ? currentUser.nome.split(" ").map((n) => n[0]).slice(0, 2).join("").toUpperCase()
+        : "?";
+
     useEffect(() => {
         const loadUser = async () => {
             const user = await getCurrentUser()
@@ -34,8 +38,8 @@ const HeaderCallCenter = ({ toggleSidebar, isSidebarOpen }) => {
     return (
         <header className="absolute top-0 left-0 w-full h-28 bg-[#24ADE8] shadow-md z-10">
             <div className={`mt-8 gap-5 flex items-center transition-all duration-300 ${isSidebarOpen ? 'ml-[300px]' : 'ml-8'}`}>
-                <button 
-                    onClick={toggleSidebar} 
+                <button
+                    onClick={toggleSidebar}
                     className="text-white hover:bg-[#ffffff20] p-2 rounded-md transition-colors"
                 >
                     <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -79,13 +83,59 @@ const HeaderCallCenter = ({ toggleSidebar, isSidebarOpen }) => {
                                 </div>
                             </button>
 
-                            <div className={`absolute z-10 right-0 mt-1 w-56 p-3 font-lexend flex flex-col gap-3 bg-gray-100 rounded-lg shadow-lg transition-all duration-200 ease-in-out ${clickUserProfile ? "opacity-100 translate-y-0 scale-100 pointer-events-auto " : "opacity-0 -translate-y-2 scale-95 pointer-events-none"}`}>
-                                <div className="bg-[#24ADE8] text-white p-2 shadow-lg rounded-md flex gap-1 items-center">
-                                    <img src={iconUserProfile} alt="Icone Perfil Funcionario" />
-                                    <p className=" ">{currentUser?.nome}</p>
+                            <div
+                                className={`absolute z-10 left-4 mt-1 w-56 font-lexend bg-white border border-gray-100 rounded-xl overflow-hidden shadow-lg transition-all duration-200 ease-in-out ${clickUserProfile
+                                    ? "opacity-100 translate-y-0 scale-100 pointer-events-auto"
+                                    : "opacity-0 -translate-y-2 scale-95 pointer-events-none"
+                                    }`}
+                            >
+
+                                <div className="flex items-center gap-2.5 px-3.5 py-3 border-b border-gray-100">
+                                    <div className="w-9 h-9 rounded-full bg-[#24ADE8] flex items-center justify-center text-white text-sm font-medium shrink-0">
+                                        {initials}
+                                    </div>
+                                    <div className="overflow-hidden">
+                                        <p className="text-sm font-medium text-gray-800 truncate">{currentUser?.nome}</p>
+                                        <p className="text-xs text-gray-400">Online</p>
+                                    </div>
                                 </div>
-                                <p className="text-black  text-[0.9rem]"><strong>Email:</strong> {currentUser?.email}</p>
-                                <p className="text-black text-[0.9rem]"><strong>Setor:</strong> {currentUser?.setor}</p>
+
+
+                                <div className="px-3.5 py-2">
+                                    <div className="py-2 border-b border-gray-50">
+                                        <p className="text-[11px] text-gray-400 mb-0.5">Email</p>
+                                        <p className="text-[13px] font-medium text-gray-700 truncate">{currentUser?.email}</p>
+                                    </div>
+                                    <div className="py-2">
+                                        <p className="text-[11px] text-gray-400 mb-0.5">Setor</p>
+                                        <p className="text-[13px] font-medium text-gray-700">{currentUser?.setor
+                                            ?.toLowerCase()
+                                            ?.replace(/_/g, " ")
+                                            ?.replace(/\b\w/g, (letra) => letra.toUpperCase())}</p>
+                                    </div>
+                                </div>
+
+
+                                <div className="px-3.5 pb-3">
+                                    <button className="w-full flex items-center justify-center gap-1.5 py-1.5 rounded-lg border border-gray-100 text-xs text-gray-400 hover:bg-gray-50 transition" onClick={() => Swal.fire({
+                                        title: "Você deseja mesmo sair ?",
+                                        icon: "question",
+                                        showCancelButton: true,
+                                        confirmButtonColor: "#24ADE8",
+                                        cancelButtonColor: "#d33",
+                                        confirmButtonText: "Sair",
+                                        cancelButtonText: "Cancelar"
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            sair();
+                                        }
+                                    })} >
+                                        <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+                                            <path d="M6 2H3a1 1 0 00-1 1v10a1 1 0 001 1h3M10 11l3-3-3-3M13 8H6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
+                                        Sair
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </OutsideClickHandler>
@@ -98,7 +148,7 @@ const HeaderCallCenter = ({ toggleSidebar, isSidebarOpen }) => {
                             title: "Você deseja mesmo sair ?",
                             icon: "question",
                             showCancelButton: true,
-                            iconColor: "#24ADE8",
+                            iconColor: "",
                             confirmButtonColor: "#24ADE8",
                             cancelButtonColor: "#d33",
                             confirmButtonText: "Sair",
