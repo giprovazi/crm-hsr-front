@@ -11,12 +11,16 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react"
 import OutsideClickHandler from "react-outside-click-handler";
 import Swal from 'sweetalert2'
+import ModalSair from "./ModalSair";
+import ModalNotificacoes from "./ModalNotificacoes"
 
 const HeaderCallCenter = ({ toggleSidebar, isSidebarOpen }) => {
     const { user, logout, getCurrentUser } = useAuth();
     const [currentUser, setCurrentUser] = useState(null)
     const navigate = useNavigate();
     const [clickUserProfile, setClickUserProfile] = useState(false);
+    const [modalSair, setModalSair] = useState(false);
+    const [modalNotificacoes, setModalNotificacoes] = useState(false);
 
     const sair = () => {
         logout()
@@ -36,7 +40,7 @@ const HeaderCallCenter = ({ toggleSidebar, isSidebarOpen }) => {
     }, [])
 
     return (
-        <header className="absolute top-0 left-0 w-full h-28 bg-[#24ADE8] shadow-md z-10">
+        <header className="absolute top-0 left-0 w-full h-28 bg-[#24ADE8] shadow-md z-10 ">
             <div className={`mt-8 gap-5 flex items-center transition-all duration-300 ${isSidebarOpen ? 'ml-[300px]' : 'ml-8'}`}>
                 <button
                     onClick={toggleSidebar}
@@ -117,19 +121,7 @@ const HeaderCallCenter = ({ toggleSidebar, isSidebarOpen }) => {
 
 
                                 <div className="px-3.5 pb-3">
-                                    <button className="w-full flex items-center justify-center gap-1.5 py-1.5 rounded-lg border border-gray-100 text-xs text-gray-400 hover:bg-gray-50 transition" onClick={() => Swal.fire({
-                                        title: "Você deseja mesmo sair ?",
-                                        icon: "question",
-                                        showCancelButton: true,
-                                        confirmButtonColor: "#24ADE8",
-                                        cancelButtonColor: "#d33",
-                                        confirmButtonText: "Sair",
-                                        cancelButtonText: "Cancelar"
-                                    }).then((result) => {
-                                        if (result.isConfirmed) {
-                                            sair();
-                                        }
-                                    })} >
+                                    <button className="w-full flex items-center justify-center gap-1.5 py-1.5 rounded-lg border border-gray-100 text-xs text-gray-400 hover:bg-gray-50 transition" onClick={() => setModalSair(true)} >
                                         <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
                                             <path d="M6 2H3a1 1 0 00-1 1v10a1 1 0 001 1h3M10 11l3-3-3-3M13 8H6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
@@ -143,24 +135,33 @@ const HeaderCallCenter = ({ toggleSidebar, isSidebarOpen }) => {
                     <div className=" h-9 w-[1px] bg-[#ffffff]" />
 
                     <div className="flex gap-2">
-                        <img src={iconNotificationNone} alt="Icone Notificacao" />
-                        <button onClick={() => Swal.fire({
-                            title: "Você deseja mesmo sair ?",
-                            icon: "question",
-                            showCancelButton: true,
-                            iconColor: "",
-                            confirmButtonColor: "#24ADE8",
-                            cancelButtonColor: "#d33",
-                            confirmButtonText: "Sair",
-                            cancelButtonText: "Cancelar"
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                sair();
-                            }
-                        })} >
+                        <OutsideClickHandler onOutsideClick={() => setModalNotificacoes(false)}>
+                            <button onClick={() => setModalNotificacoes(true)} className="mt-2">
+                                <img src={iconNotificationNone} alt="Icone Notificacao" />
+                            </button>
+                            {modalNotificacoes && (
+                                <ModalNotificacoes onClose={() => setModalNotificacoes(false)} />
+                            )}
+
+                        </OutsideClickHandler>
+
+
+                        <button onClick={() => setModalSair(true)} >
+
                             <img src={iconLogout} alt="Logout" />
                         </button>
                     </div>
+
+                    {modalSair && (
+                        <ModalSair
+                            currentUser={currentUser}
+                            onClose={() => setModalSair(false)}
+                            onConfirm={() => { setModalSair(false); sair(); }}
+                        />
+                    )}
+
+
+
                 </div>
             </div>
         </header >

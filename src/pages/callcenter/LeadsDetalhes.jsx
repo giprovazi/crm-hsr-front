@@ -21,6 +21,7 @@ const LeadsDetalhes = () => {
     const [lead, setLead] = useState(null);
     const [currentUser, setCurrentUser] = useState(null);
     const [modalTipo, setModalTipo] = useState(null);
+    const [historicoLead, setHistoricoLead] = useState(null);
 
     useEffect(() => {
         const loadUser = async () => {
@@ -42,7 +43,19 @@ const LeadsDetalhes = () => {
             }
         };
 
+        const fetchHistorico = async () => {
+            try {
+                const response = await api.get(`api/leads/historico/${id}`);
+
+                setHistoricoLead(response.data);
+
+            } catch (error) {
+                console.error("Erro ao buscar histórico:", error);
+            }
+        };
+
         fetchLead();
+        fetchHistorico();
     }, [id, currentUser]);
 
     if (!lead) {
@@ -118,7 +131,6 @@ const LeadsDetalhes = () => {
                                             observacao
                                         });
 
-                                        // opcional: feedback
                                         console.log("Contato registrado com sucesso");
 
                                         setModalTipo(null);
@@ -180,19 +192,42 @@ const LeadsDetalhes = () => {
                         <p className="text-xs font-medium text-gray-400 uppercase tracking-widest mb-3 font-lexend">
                             Histórico
                         </p>
-                        {[
-                            { label: "Email enviado", time: "Hoje, 09:14", color: "bg-blue-400" },
-                            { label: "Ligação sem resposta", time: "Ontem, 15:32", color: "bg-amber-400" },
-                            { label: "Lead criado", time: "10 abr, 11:00", color: "bg-green-400" },
-                        ].map(({ label, time, color }) => (
-                            <div key={label} className="flex gap-3 py-2.5 border-b border-gray-50 last:border-b-0">
-                                <div className={`w-2 h-2 rounded-full ${color} mt-1.5 shrink-0`} />
+                        {historicoLead?.map((historico) => (
+                            <div
+                                key={historico.id}
+                                className="flex gap-3 py-2.5 border-b border-gray-50 last:border-b-0"
+                            >
+                                <div
+                                    className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${historico.tipoEvento === "CONTATO"
+                                            ? "bg-blue-400"
+                                            : historico.tipoEvento === "CRIACAO"
+                                                ? "bg-green-400"
+                                                : "bg-amber-400"
+                                        }`}
+                                />
+
                                 <div>
-                                    <p className="text-xs font-medium text-gray-700 font-lexend">{label}</p>
-                                    <p className="text-xs text-gray-400 font-lexend">{time}</p>
+                                    <p className="text-xs font-medium text-gray-700 font-lexend">
+                                        {historico.tipoEvento.charAt(0) + historico.tipoEvento.slice(1).toLowerCase()}
+                                    </p>
+
+                                    <p className="text-xs text-gray-400 font-lexend">
+                                        {new Date(historico.dataHora)
+                                            .toLocaleString("pt-BR", {
+                                                day: "2-digit",
+                                                month: "short",
+                                                hour: "2-digit",
+                                                minute: "2-digit"
+                                            })
+                                            .replace(" de ", " ")
+                                            .replace(".", "")
+                                        }
+                                    </p>
                                 </div>
                             </div>
                         ))}
+
+
                     </div>
 
                 </div>

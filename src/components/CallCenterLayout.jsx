@@ -18,7 +18,7 @@ const CallCenterLayout = ({ children }) => {
 
     return (
         <div className="bg-[#f4f4f4] relative min-h-screen min-w-[1280px] flex flex-col">
-            <div className="relative flex flex-col z-20">
+            <div className="relative flex flex-col z-40">
                 <Aside isOpen={isSidebarOpen} />
             </div>
 

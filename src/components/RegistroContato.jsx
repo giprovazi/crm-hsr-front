@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 const RESULTADOS = [
   { value: "ATENDEU",      label: "Atendeu",       color: "#22c55e", span: false },
   { value: "NAO_ATENDEU",  label: "Não atendeu",   color: "#f87171", span: false },
@@ -6,20 +7,41 @@ const RESULTADOS = [
   { value: "RESPONDEU",    label: "Respondeu",     color: "#60a5fa", span: false },
   { value: "NAO_RESPONDEU",label: "Não respondeu", color: "#a78bfa", span: true  },
 ];
- 
+
 export default function RegistrarContato({ modalTipo, lead, onClose, onSalvar }) {
   const [resultadoContato, setResultadoContato] = useState(null);
   const [observacao, setObservacao] = useState("");
- 
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    requestAnimationFrame(() => setVisible(true));
+  }, []);
+
+  const handleClose = () => {
+    setVisible(false);
+    setTimeout(onClose, 180);
+  };
+
   const handleSalvar = () => {
     if (!resultadoContato) return;
-    onSalvar({ resultadoContato, observacao });
+    setVisible(false);
+    setTimeout(() => onSalvar({ resultadoContato, observacao }), 180);
   };
- 
+
   return (
-    <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
-      <div className="bg-white rounded-xl border border-gray-100 w-[400px] overflow-hidden shadow-lg font-lexend">
- 
+    <div
+      className={`fixed inset-0 flex items-center justify-center z-50 transition-all duration-[180ms] ease-in-out ${
+        visible ? "bg-black/30" : "bg-black/0"
+      }`}
+    >
+      <div
+        className={`bg-white rounded-xl border border-gray-100 w-[400px] overflow-hidden shadow-lg font-lexend transition-all duration-[180ms] ease-in-out ${
+          visible
+            ? "opacity-100 translate-y-0 scale-100"
+            : "opacity-0 translate-y-2 scale-95"
+        }`}
+      >
+
         <div className="px-5 pt-4 pb-3.5 border-b border-gray-100">
           <div className="flex items-center gap-2 mb-0.5">
             <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
@@ -34,10 +56,9 @@ export default function RegistrarContato({ modalTipo, lead, onClose, onSalvar })
             <p className="text-xs text-gray-400">{lead.nome} · #{lead.id}</p>
           )}
         </div>
- 
+
         <div className="px-5 py-4">
- 
-          {/* Resultado */}
+
           <p className="text-[10px] font-medium text-gray-400 uppercase tracking-widest mb-2.5">
             Resultado do contato
           </p>
@@ -62,8 +83,7 @@ export default function RegistrarContato({ modalTipo, lead, onClose, onSalvar })
               </button>
             ))}
           </div>
- 
-          {/* Observação */}
+
           <p className="text-[10px] font-medium text-gray-400 uppercase tracking-widest mb-2.5">
             Observações
           </p>
@@ -75,25 +95,24 @@ export default function RegistrarContato({ modalTipo, lead, onClose, onSalvar })
             className="w-full border border-gray-100 rounded-lg px-3 py-2 text-sm text-gray-700 placeholder-gray-300 resize-none outline-none focus:border-[#24ADE8] transition"
           />
         </div>
- 
+
         <div className="px-5 pb-4 flex justify-end gap-2 border-t border-gray-100 pt-3">
           <button
-            onClick={onClose}
-            className="px-4 py-1.5 rounded-lg border border-gray-100 text-xs text-gray-400 hover:bg-gray-50 transition"
+            onClick={handleClose}
+            className="px-4 py-1.5 rounded-lg border border-gray-100 text-sm text-gray-400 hover:bg-gray-50 transition"
           >
             Cancelar
           </button>
           <button
             onClick={handleSalvar}
             disabled={!resultadoContato}
-            className="px-5 py-1.5 rounded-lg bg-[#24ADE8] text-white text-xs font-medium hover:bg-[#1a9fd6] disabled:opacity-40 disabled:cursor-not-allowed transition"
+            className="px-5 py-1.5 rounded-lg bg-[#24ADE8] text-white text-sm font-medium hover:bg-[#1a9fd6] disabled:opacity-40 disabled:cursor-not-allowed transition"
           >
             Salvar
           </button>
         </div>
- 
+
       </div>
     </div>
   );
 }
- 
