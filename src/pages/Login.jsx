@@ -68,7 +68,7 @@ const Login = () => {
                         <div className="flex flex-col items-start w-full gap-12 px-5">
                             <div className="w-full">
                                 <p className="font-lexend text-white text-[20px] mb-2">Email</p>
-                                <input value={email} onChange={(e) => setEmail(e.target.value)}     type="email" name="email" autoComplete="email" placeholder="Digite seu email..." className=" placeholder:font-konkhmer placeholder:text-[#b8b8b8c5] text-[16px] w-full py-6 px-3 rounded-lg outline-none border-none appearance-none focus:outline-none focus:ring-0"/>
+                                <input value={email} onChange={(e) => setEmail(e.target.value)}     type="email" name="email" autoComplete="email" placeholder="Digite seu email..." className=" placeholder:font-konkhmer placeholder:text-[#b8b8b8c5] text-[16px] w-full py-6 px-3 rounded-lg font-lexend font-thin outline-none border-none appearance-none focus:outline-none focus:ring-0"/>
                             </div>
 
                             <div className="w-full">

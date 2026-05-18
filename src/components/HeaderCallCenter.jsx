@@ -60,7 +60,7 @@ const HeaderCallCenter = ({ toggleSidebar, isSidebarOpen }) => {
                         <img src={iconPlus} alt="Icone Adicionar" className="w-[1.5rem] transition-transform duration-300 ease-in-out group-hover:scale-110 group-hover:rotate-90" />
                     </div>
 
-                    <div className="w-full max-w-xs border border-white flex justify-between rounded-md pl-3 py-3 px-2 z-20 group hover:bg-[#ffffff0e] transition-colors duration-200">
+                    <div className="w-full max-w-xs border border-white flex justify-between rounded-md pl-3 py-3 px-2 z-20 group hover:bg-[#ffffff0e] transition-colors duration-200" onClick={()=> navigate("/callcenter/agenda/novo-atendimento")}>
                         <div className="flex items-center gap-4 ">
                             <img src={iconAgendaWhite} alt="Icone Agenda" className="w-[1.8rem]" />
                             <p className="cursor-default">Novo Agendamento</p>

@@ -4,6 +4,7 @@ import RoleRoute from "./RoleRoute";
 import Home from "../pages/callcenter/Home"
 import Leads from "../pages/callcenter/Leads";
 import Agenda from "../pages/callcenter/Agenda";
+import NovoAgendamento from "../pages/callcenter/NovoAgendamento";
 import Confirmacoes from "../pages/callcenter/Confirmacoes";
 import Historico from "../pages/callcenter/Historico";
 import Cadastro from "../pages/callcenter/Cadastro";
@@ -48,7 +49,7 @@ export default function AppRoutes() {
           <RoleRoute allowedRoles={["CALL_CENTER", "ADMIN"]}>
             <LeadsDetalhes />
           </RoleRoute>
-          } 
+        }
         />
 
         <Route
@@ -56,6 +57,15 @@ export default function AppRoutes() {
           element={
             <RoleRoute allowedRoles={["CALL_CENTER", "ADMIN"]}>
               <Agenda />
+            </RoleRoute>
+          }
+        />
+
+        <Route
+          path="/callcenter/agenda/novo-agendamento"
+          element={
+            <RoleRoute allowedRoles={["CALL_CENTER", "ADMIN"]}>
+              <NovoAgendamento />
             </RoleRoute>
           }
         />
